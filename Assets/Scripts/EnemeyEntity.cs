@@ -20,6 +20,8 @@ namespace Default
 
 	    void Start()
 	    {
+            base.Start();
+
             randPey = Random.Range(0f, 2f * Mathf.PI);
             randCircleDir = Random.value > .5f ? -1 : 1;
         }

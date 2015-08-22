@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ab45633cf960e4d41b4c068db3d45df6
-timeCreated: 1440252224
+timeCreated: 1440258550
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -169,8 +169,8 @@ TextureImporter:
         y: 32
         width: 10
         height: 14
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: PlayerLeft_1
       rect:
@@ -179,8 +179,8 @@ TextureImporter:
         y: 16
         width: 10
         height: 14
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: PlayerLeft_2
       rect:
@@ -189,8 +189,8 @@ TextureImporter:
         y: 0
         width: 10
         height: 14
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: PlayerRight_Idle
       rect:
@@ -199,8 +199,8 @@ TextureImporter:
         y: 32
         width: 10
         height: 14
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: PlayerRight_1
       rect:
@@ -209,8 +209,8 @@ TextureImporter:
         y: 16
         width: 10
         height: 14
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: PlayerRight_2
       rect:
@@ -219,8 +219,8 @@ TextureImporter:
         y: 0
         width: 10
         height: 14
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: PlayerUp_Idle
       rect:
@@ -229,8 +229,8 @@ TextureImporter:
         y: 32
         width: 4
         height: 14
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: PlayerUp_1
       rect:
@@ -239,8 +239,8 @@ TextureImporter:
         y: 16
         width: 4
         height: 14
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: PlayerUp_2
       rect:
@@ -249,8 +249,8 @@ TextureImporter:
         y: 0
         width: 4
         height: 14
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: PlayerDown_2
       rect:
@@ -259,8 +259,8 @@ TextureImporter:
         y: 0
         width: 4
         height: 14
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: PlayerDown_1
       rect:
@@ -269,8 +269,8 @@ TextureImporter:
         y: 16
         width: 4
         height: 14
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: PlayerDown_Idle
       rect:
@@ -279,8 +279,8 @@ TextureImporter:
         y: 32
         width: 4
         height: 14
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
