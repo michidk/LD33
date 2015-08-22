@@ -11,10 +11,16 @@ namespace Default
         protected SpriteRenderer renderer;
         protected BoxCollider2D collider;
 
+        protected BulletPool bulletPool;
+        protected EnemyPool enemyPool;
+
         protected virtual void Awake()
         {
             renderer = GetComponent<SpriteRenderer>();
             collider = GetComponent<BoxCollider2D>();
+
+            bulletPool = BulletPool.Instance;
+            enemyPool = EnemyPool.Instance;
         }
 
         protected virtual void Start() {}

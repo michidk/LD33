@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ab45633cf960e4d41b4c068db3d45df6
-timeCreated: 1440270135
+timeCreated: 1440273358
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -38,6 +38,7 @@ TextureImporter:
     21300062: PlayerDown_1
     21300064: PlayerDown_Idle
     21300066: Bullet
+    21300068: Blood
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -292,6 +293,16 @@ TextureImporter:
         height: 1
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Blood
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 16
+        width: 14
+        height: 11
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

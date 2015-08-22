@@ -7,13 +7,25 @@ namespace Default
 {
 	public class PlayerEntity : BaseEntity
 	{
+	    public static PlayerEntity Instance;
+
 	    public GameObject[] WeaponPos;
+
+	    [HideInInspector]
+        public bool IsControlling = true;
 
 	    private Animator animator;
 	    private LineRenderer line;
 
 	    private Vector2 movement = Vector2.zero;
 	    private int dir = 2;
+
+	    void Awake()
+	    {
+	        base.Awake();
+
+	        Instance = this;
+	    }
 
 	    void Start()
 	    {
@@ -27,10 +39,18 @@ namespace Default
         {
             base.Update();
 
-            Move();
-            Animate();
-            DrawLaserLine();
-            Shoot();
+            if (IsControlling)
+            {
+                Move();
+                Animate();
+                DrawLaserLine();
+                Shoot();
+            }
+            else
+            {
+                Animate();
+            }
+
         }
 
 	    private void Move()
@@ -49,10 +69,11 @@ namespace Default
 
 	    private void Animate()
 	    {
-            Vector3 screenMousePos = Input.mousePosition;
-            Vector3 bodyCenter = Camera.main.WorldToScreenPoint(this.transform.position);
-            Vector3 diff = screenMousePos - bodyCenter;
-            float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg * -1 + 90;
+            var object_pos = Camera.main.WorldToScreenPoint(this.transform.position);
+            var mouse_pos = Input.mousePosition;
+            mouse_pos.x = mouse_pos.x - object_pos.x;
+            mouse_pos.y = mouse_pos.y - object_pos.y;
+            var angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg * -1 + 90;
 
             if ((angle > -45 && angle < 0) || (angle < 45 && angle > 0))
             {
@@ -66,11 +87,10 @@ namespace Default
             {
                 dir = 2;
             }
-            if (angle > 225 && angle < 315 || angle < -90 && angle > -45)
+            if (angle > 225 && angle < 315 || angle > -90 && angle < -45)
             {
                 dir = 3;
             }
-            Debug.Log(angle + " - " + dir);
 
             animator.SetInteger("dir", dir);
             animator.SetFloat("speed", movement.magnitude > 0 ? 1 : 0);
@@ -93,10 +113,10 @@ namespace Default
             mouse_pos.y = mouse_pos.y - object_pos.y;
             var angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
 
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1") || (Input.GetKey(KeyCode.Alpha1) && Input.GetKey(KeyCode.Alpha2) && Input.GetKey(KeyCode.Alpha3)))
             {
                 //Quaternion.AngleAxis(angle, Vector3.forward)
-                BulletPool.Instance.Take(weaponPos, Quaternion.Euler(new Vector3(0, 0, angle)));
+                bulletPool.Take(weaponPos, Quaternion.Euler(new Vector3(0, 0, angle)));
             }
         }
 

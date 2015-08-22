@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using ADBannerView = UnityEngine.iOS.ADBannerView;
 
 namespace Default 
 {
-	public class EnemeyEntity : BaseEntity
+	public class EnemyEntity : BaseEntity
 	{
 
 	    public float JitterFac = 5;
 	    public float MaxStraightTime = 5;
+	    public GameObject BloodPrefab;
 
 	    private float c = 0;
 	    private bool straight = false;
@@ -75,7 +77,13 @@ namespace Default
 
 	    public override void Kill()
 	    {
-	        Destroy(this.gameObject);
+            enemyPool.Put(this.gameObject);
+
+	        var bloodPos = this.transform.position;
+	        bloodPos.z += 400;
+            Instantiate(BloodPrefab, bloodPos, Quaternion.identity);
+
+	        GameManager.Instance.Score--;
 	    }
 
 	    private RaycastHit2D Sidecast(Vector2 dir)

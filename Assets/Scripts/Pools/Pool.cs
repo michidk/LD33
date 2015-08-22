@@ -4,25 +4,21 @@ using System.Collections.Generic;
 
 namespace Default 
 {
-	public class BulletPool : MonoBehaviour 
+	public class Pool : MonoBehaviour 
 	{
-        public static BulletPool Instance;
-
         public int StartCount = 10;
-        public GameObject BulletPrefab;
+        public GameObject[] Prefabs;
+	    public int GoCount { get; private set; }
+	    public int MaxCount = -1;
 
-        private List<GameObject> pool = new List<GameObject>();
-
-        void Awake()
-        {
-            Instance = this;
-        }
+	    private List<GameObject> pool = new List<GameObject>();
 
         void Start()
         {
             for (int x = 0; x < 10; x++)
             {
-                Put((GameObject)Instantiate(BulletPrefab, Vector3.zero, Quaternion.identity));
+                Put((GameObject)Instantiate(Prefabs[Random.Range(0, Prefabs.Length - 1)], Vector3.zero, Quaternion.identity));
+                GoCount++;
             }
         }
 
@@ -40,8 +36,17 @@ namespace Default
             }
             else
             {
-                go = (GameObject) Instantiate(BulletPrefab, pos, rot);
+                if (MaxCount == -1 || GoCount < MaxCount)
+                {
+                    go = (GameObject) Instantiate(Prefabs[Random.Range(0, Prefabs.Length - 1)], pos, rot);
+                    GoCount++;
+                }
+                else
+                {
+                    return null;
+                }
             }
+            go.transform.parent = this.transform;
 
             return go;
         }
