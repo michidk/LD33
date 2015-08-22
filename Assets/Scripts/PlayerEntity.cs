@@ -12,6 +12,9 @@ namespace Default
 	    private Animator animator;
 	    private LineRenderer line;
 
+	    private Vector2 movement = Vector2.zero;
+	    private int dir = 2;
+
 	    void Start()
 	    {
 	        base.Start();
@@ -24,8 +27,15 @@ namespace Default
         {
             base.Update();
 
-            //moving
-            var movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            Move();
+            Animate();
+            DrawLaserLine();
+            Shoot();
+        }
+
+	    private void Move()
+	    {
+            movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
             movement *= MoveSpeed * Time.deltaTime;
             Vector3 newPos = this.transform.position + (Vector3)movement;
@@ -35,43 +45,59 @@ namespace Default
             newPos.z = newPos.y - collider.bounds.size.y / 2;
 
             this.transform.position = newPos;
-            
-            //animator params
-            int dir = 2;
+        }
 
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 relMousePos = mousePos - this.transform.position;
-            float angle = Vector2.Angle(Vector2.up, relMousePos) % 360;
-            Vector3 cross = Vector3.Cross(Vector2.up, relMousePos);
-            if (cross.z > 0)
-                angle = 360 - angle;
+	    private void Animate()
+	    {
+            Vector3 screenMousePos = Input.mousePosition;
+            Vector3 bodyCenter = Camera.main.WorldToScreenPoint(this.transform.position);
+            Vector3 diff = screenMousePos - bodyCenter;
+            float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg * -1 + 90;
 
-            if ((angle < 45 && angle > 0) || (angle < 360 && angle > 315))
+            if ((angle > -45 && angle < 0) || (angle < 45 && angle > 0))
             {
                 dir = 0;
             }
-            else if (angle > 45 && angle < 135)
+            if (angle > 45 && angle < 135)
             {
                 dir = 1;
             }
-            else if (angle > 135 && angle < 225)
+            if (angle > 135 && angle < 225)
             {
                 dir = 2;
             }
-            else if (angle > 225 && angle < 315)
+            if (angle > 225 && angle < 315 || angle < -90 && angle > -45)
             {
                 dir = 3;
             }
+            Debug.Log(angle + " - " + dir);
 
-
-            var wPos = WeaponPos[dir].transform.position;
-            
             animator.SetInteger("dir", dir);
             animator.SetFloat("speed", movement.magnitude > 0 ? 1 : 0);
+        }
 
-            //mouse target line
+	    private void DrawLaserLine()
+	    {
+            var wPos = WeaponPos[dir].transform.position;
             line.SetPosition(0, wPos);
-            line.SetPosition(1, mousePos);
+            line.SetPosition(1, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        }
+
+	    private void Shoot()
+	    {
+	        var weaponPos = WeaponPos[dir].gameObject.transform.position;
+
+            var object_pos = Camera.main.WorldToScreenPoint(weaponPos);
+	        var mouse_pos = Input.mousePosition;
+            mouse_pos.x = mouse_pos.x - object_pos.x;
+            mouse_pos.y = mouse_pos.y - object_pos.y;
+            var angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
+
+            if (Input.GetButtonDown("Fire1"))
+            {
+                //Quaternion.AngleAxis(angle, Vector3.forward)
+                BulletPool.Instance.Take(weaponPos, Quaternion.Euler(new Vector3(0, 0, angle)));
+            }
         }
 
 	    public override void Kill()

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ab45633cf960e4d41b4c068db3d45df6
-timeCreated: 1440258550
+timeCreated: 1440270135
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -37,6 +37,7 @@ TextureImporter:
     21300060: PlayerDown_2
     21300062: PlayerDown_1
     21300064: PlayerDown_Idle
+    21300066: Bullet
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -86,7 +87,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 3
-        y: 64
+        y: 96
         width: 8
         height: 4
       alignment: 7
@@ -96,7 +97,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 20
-        y: 64
+        y: 96
         width: 8
         height: 5
       alignment: 7
@@ -106,7 +107,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 34
-        y: 64
+        y: 96
         width: 12
         height: 7
       alignment: 7
@@ -116,7 +117,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 51
-        y: 64
+        y: 96
         width: 10
         height: 8
       alignment: 7
@@ -126,7 +127,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 4
-        y: 48
+        y: 80
         width: 6
         height: 5
       alignment: 7
@@ -136,7 +137,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 21
-        y: 48
+        y: 80
         width: 6
         height: 6
       alignment: 7
@@ -146,7 +147,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 36
-        y: 48
+        y: 80
         width: 8
         height: 8
       alignment: 7
@@ -156,7 +157,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 52
-        y: 48
+        y: 80
         width: 8
         height: 9
       alignment: 7
@@ -166,7 +167,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 3
-        y: 32
+        y: 64
         width: 10
         height: 14
       alignment: 0
@@ -176,7 +177,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 3
-        y: 16
+        y: 48
         width: 10
         height: 14
       alignment: 0
@@ -186,7 +187,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 3
-        y: 0
+        y: 32
         width: 10
         height: 14
       alignment: 0
@@ -195,8 +196,8 @@ TextureImporter:
     - name: PlayerRight_Idle
       rect:
         serializedVersion: 2
-        x: 19
-        y: 32
+        x: 18
+        y: 64
         width: 10
         height: 14
       alignment: 0
@@ -205,8 +206,8 @@ TextureImporter:
     - name: PlayerRight_1
       rect:
         serializedVersion: 2
-        x: 19
-        y: 16
+        x: 18
+        y: 48
         width: 10
         height: 14
       alignment: 0
@@ -215,8 +216,8 @@ TextureImporter:
     - name: PlayerRight_2
       rect:
         serializedVersion: 2
-        x: 19
-        y: 0
+        x: 18
+        y: 32
         width: 10
         height: 14
       alignment: 0
@@ -226,7 +227,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 38
-        y: 32
+        y: 64
         width: 4
         height: 14
       alignment: 0
@@ -236,7 +237,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 38
-        y: 16
+        y: 48
         width: 4
         height: 14
       alignment: 0
@@ -246,7 +247,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 38
-        y: 0
+        y: 32
         width: 4
         height: 14
       alignment: 0
@@ -256,7 +257,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 54
-        y: 0
+        y: 32
         width: 4
         height: 14
       alignment: 0
@@ -266,7 +267,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 54
-        y: 16
+        y: 48
         width: 4
         height: 14
       alignment: 0
@@ -276,9 +277,19 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 54
-        y: 32
+        y: 64
         width: 4
         height: 14
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Bullet
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 16
+        width: 2
+        height: 1
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

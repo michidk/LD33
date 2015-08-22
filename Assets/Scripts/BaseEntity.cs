@@ -6,9 +6,6 @@ namespace Default
 {
     public abstract class BaseEntity : MonoBehaviour
     {
-        protected const int GroundLayer = 1 << 8;
-        protected const int EnemyLayer = 1 << 9;
-
         public float MoveSpeed = 15;
     
         protected SpriteRenderer renderer;
