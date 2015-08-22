@@ -20,7 +20,7 @@ namespace Default
 
         void Update()
         {
-            if (GameManager.Instance.Score > 50 && !didWin)
+            if (GameManager.Instance.Score >= 50 && !didWin)
             {
                 didWin = true;
                 WinScreen.SetActive(true);
@@ -30,7 +30,7 @@ namespace Default
                 ScoreText.SetActive(false);
             }
 
-            if (GameManager.Instance.Score < ScoreToLoose && !didLoose)
+            if (GameManager.Instance.Score <= ScoreToLoose && !didLoose)
             {
                 didLoose = true;
                 LooseScreen.SetActive(true);

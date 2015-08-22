@@ -989,22 +989,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 21284924, guid: 87d34694a30c68e46b08413ca409e463, type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300064, guid: ab45633cf960e4d41b4c068db3d45df6,
-        type: 3}
-    - target: {fileID: 427940, guid: 87d34694a30c68e46b08413ca409e463, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: .31099999
-      objectReference: {fileID: 0}
-    - target: {fileID: 2074690, guid: 87d34694a30c68e46b08413ca409e463, type: 2}
-      propertyPath: orthographic size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 11434408, guid: 87d34694a30c68e46b08413ca409e463, type: 2}
+    - target: {fileID: 12090364, guid: 87d34694a30c68e46b08413ca409e463, type: 2}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 87d34694a30c68e46b08413ca409e463, type: 2}
@@ -2286,7 +2273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArenaSize: 10
   SpawnTime: 3
-  ScoreChangedTime: 2
+  ScoreChangedTime: 1.5
   ScoreText: {fileID: 609117455}
 --- !u!4 &1607731966
 Transform:
@@ -2311,7 +2298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecdc7c90d6bd45a4395047e0fcad3fb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScoreToWin: 50
+  ScoreToWin: 30
   ScoreToLoose: -100
   WinScreen: {fileID: 74618148}
   LooseScreen: {fileID: 217141486}

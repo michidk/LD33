@@ -3,37 +3,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 
-namespace Default 
+namespace Default
 {
-	public class PlayerEntity : BaseEntity
-	{
-	    public static PlayerEntity Instance;
+    public class PlayerEntity : BaseEntity
+    {
+        public static PlayerEntity Instance;
 
-	    public GameObject[] WeaponPos;
+        public GameObject[] WeaponPos;
 
-	    [HideInInspector]
+        [HideInInspector]
         public bool IsControlling = true;
 
-	    private Animator animator;
-	    private LineRenderer line;
+        private Animator animator;
+        private LineRenderer line;
 
-	    private Vector2 movement = Vector2.zero;
-	    private int dir = 2;
+        private Vector2 movement = Vector2.zero;
+        private int dir = 2;
 
-	    void Awake()
-	    {
-	        base.Awake();
+        void Awake()
+        {
+            base.Awake();
 
-	        Instance = this;
-	    }
+            Instance = this;
+        }
 
-	    void Start()
-	    {
-	        base.Start();
+        void Start()
+        {
+            base.Start();
 
-	        animator = GetComponent<Animator>();
-	        line = GetComponent<LineRenderer>();
-	    }
+            animator = GetComponent<Animator>();
+            line = GetComponent<LineRenderer>();
+        }
 
         void Update()
         {
@@ -43,7 +43,7 @@ namespace Default
             {
                 Move();
                 Animate();
-                DrawLaserLine();
+                //DrawLaserLine();
                 Shoot();
             }
             else
@@ -53,9 +53,18 @@ namespace Default
 
         }
 
-	    private void Move()
-	    {
-            movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        public void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Enemy"))
+            {
+                EnemyEntity enemy = collision.GetComponent<EnemyEntity>();
+                enemy.Kill();
+            }
+        }
+
+        private void Move()
+        {
+            movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
             movement *= MoveSpeed * Time.deltaTime;
             Vector3 newPos = this.transform.position + (Vector3)movement;
@@ -67,8 +76,8 @@ namespace Default
             this.transform.position = newPos;
         }
 
-	    private void Animate()
-	    {
+        private void Animate()
+        {
             var object_pos = Camera.main.WorldToScreenPoint(this.transform.position);
             var mouse_pos = Input.mousePosition;
             mouse_pos.x = mouse_pos.x - object_pos.x;
@@ -96,19 +105,19 @@ namespace Default
             animator.SetFloat("speed", movement.magnitude > 0 ? 1 : 0);
         }
 
-	    private void DrawLaserLine()
-	    {
+        private void DrawLaserLine()
+        {
             var wPos = WeaponPos[dir].transform.position;
             line.SetPosition(0, wPos);
             line.SetPosition(1, Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
 
-	    private void Shoot()
-	    {
-	        var weaponPos = WeaponPos[dir].gameObject.transform.position;
+        private void Shoot()
+        {
+            var weaponPos = WeaponPos[dir].gameObject.transform.position;
 
             var object_pos = Camera.main.WorldToScreenPoint(weaponPos);
-	        var mouse_pos = Input.mousePosition;
+            var mouse_pos = Input.mousePosition;
             mouse_pos.x = mouse_pos.x - object_pos.x;
             mouse_pos.y = mouse_pos.y - object_pos.y;
             var angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
@@ -120,9 +129,9 @@ namespace Default
             }
         }
 
-	    public override void Kill()
-	    {
-	        Application.LoadLevel(0);
-	    }
-	}
+        public override void Kill()
+        {
+            Application.LoadLevel(0);
+        }
+    }
 }
