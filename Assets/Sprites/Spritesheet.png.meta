@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ab45633cf960e4d41b4c068db3d45df6
-timeCreated: 1440273358
+timeCreated: 1440301027
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -39,6 +39,7 @@ TextureImporter:
     21300064: PlayerDown_Idle
     21300066: Bullet
     21300068: Blood
+    21300070: Shadow
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -303,6 +304,16 @@ TextureImporter:
         height: 11
       alignment: 7
       pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shadow
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 16
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

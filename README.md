@@ -14,10 +14,10 @@ I know the code is not very clean and efficient, but i only had like 24 hours be
 
 Controls: 
 Mouse & Keyboard:
-W, A, S, D or arrow keys to move. Aim with the mouse. Shoot with left click.
+W, A, S, D or arrow keys to move. Aim with the mouse. Left click to shoot.
 
 Controller:
-left stick walk. righ stick aim. LB, RB, LT, RT, A to shoot.
+left stick walk. right stick aim. LB, RB, LT, RT, A to shoot.
 
 There is more in this game than you think.
 There a two endings (you can continue the game after these).
