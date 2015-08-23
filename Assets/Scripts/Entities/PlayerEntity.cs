@@ -9,12 +9,16 @@ namespace Default
     {
         public static PlayerEntity Instance;
 
+        public AudioClip GunSound;
+        public AudioClip HurtSound;
+
         public GameObject[] WeaponPos;
 
         [HideInInspector]
         public bool IsControlling = true;
 
         private Animator animator;
+        private AudioSource audio;
         private LineRenderer line;
 
         private Vector2 movement = Vector2.zero;
@@ -25,14 +29,15 @@ namespace Default
             base.Awake();
 
             Instance = this;
+
+            animator = GetComponent<Animator>();
+            audio = GetComponent<AudioSource>();
+            line = GetComponent<LineRenderer>();
         }
 
         void Start()
         {
             base.Start();
-
-            animator = GetComponent<Animator>();
-            line = GetComponent<LineRenderer>();
         }
 
         void Update()
@@ -78,11 +83,23 @@ namespace Default
 
         private void Animate()
         {
-            var object_pos = Camera.main.WorldToScreenPoint(this.transform.position);
-            var mouse_pos = Input.mousePosition;
-            mouse_pos.x = mouse_pos.x - object_pos.x;
-            mouse_pos.y = mouse_pos.y - object_pos.y;
-            var angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg * -1 + 90;
+            Vector2 mousePos;
+            var controllerAim = new Vector2(Input.GetAxisRaw("AimHorizontal"), Input.GetAxisRaw("AimVertical"));
+            if (controllerAim.magnitude > 0)
+            {
+                //use controller
+                mousePos = new Vector2(Screen.width / 2, Screen.height / 2) + controllerAim;
+            }
+            else
+            {
+                mousePos = Input.mousePosition;
+            }
+
+            var objectPos = Camera.main.WorldToScreenPoint(this.transform.position);
+
+            mousePos.x = mousePos.x - objectPos.x;
+            mousePos.y = mousePos.y - objectPos.y;
+            var angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg * -1 + 90;
 
             if ((angle > -45 && angle < 0) || (angle < 45 && angle > 0))
             {
@@ -112,26 +129,49 @@ namespace Default
             line.SetPosition(1, Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
 
+        private bool lastFrameShot = false;
         private void Shoot()
         {
             var weaponPos = WeaponPos[dir].gameObject.transform.position;
+            var objectPos = Camera.main.WorldToScreenPoint(weaponPos);
 
-            var object_pos = Camera.main.WorldToScreenPoint(weaponPos);
-            var mouse_pos = Input.mousePosition;
-            mouse_pos.x = mouse_pos.x - object_pos.x;
-            mouse_pos.y = mouse_pos.y - object_pos.y;
-            var angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
+            Vector2 mousePos;
+            var controllerAim = new Vector2(Input.GetAxisRaw("AimHorizontal"), Input.GetAxisRaw("AimVertical"));
+            if (controllerAim.magnitude > 0)
+            {
+                //use controller
+                mousePos = (Vector2) objectPos + controllerAim;
+            }
+            else
+            {
+                mousePos = Input.mousePosition;
+            }
 
-            if (Input.GetButtonDown("Fire1") || (Input.GetKey(KeyCode.Alpha1) && Input.GetKey(KeyCode.Alpha2) && Input.GetKey(KeyCode.Alpha3)))
+            mousePos.x = mousePos.x - objectPos.x;
+            mousePos.y = mousePos.y - objectPos.y;
+            var angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
+
+            if (Input.GetButtonDown("Fire1") || (Input.GetKey(KeyCode.Alpha1) && Input.GetKey(KeyCode.Alpha2) && Input.GetKey(KeyCode.Alpha3)) || (Mathf.Abs(Input.GetAxisRaw("Fire1")) > 0 && !lastFrameShot))
             {
                 //Quaternion.AngleAxis(angle, Vector3.forward)
                 bulletPool.Take(weaponPos, Quaternion.Euler(new Vector3(0, 0, angle)));
+                audio.PlayOneShot(GunSound);
+                lastFrameShot = true;
+            }
+            else if (Mathf.Abs(Input.GetAxisRaw("Fire1")) <= 0)
+            {
+                lastFrameShot = false;
             }
         }
 
         public override void Kill()
         {
             Application.LoadLevel(0);
+        }
+
+        public AudioSource GetAudio()
+        {
+            return audio;
         }
     }
 }

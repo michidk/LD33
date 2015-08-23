@@ -83,6 +83,7 @@ namespace Default
 	        bloodPos.z += 400;
             Instantiate(BloodPrefab, bloodPos, Quaternion.identity);
 
+	        PlayerEntity.Instance.GetAudio().PlayOneShot(PlayerEntity.Instance.HurtSound);
 	        GameManager.Instance.Score--;
 	    }
 

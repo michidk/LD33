@@ -13,7 +13,7 @@ namespace Default
 
         protected BulletPool bulletPool;
         protected EnemyPool enemyPool;
-
+        
         protected virtual void Awake()
         {
             renderer = GetComponent<SpriteRenderer>();
